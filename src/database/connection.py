@@ -8,7 +8,7 @@ from contextlib import contextmanager
 
 from sqlalchemy import create_engine, event
 from sqlalchemy.orm import sessionmaker, Session
-from sqlalchemy.pool import QueuePool
+from sqlalchemy.pool import QueuePool, StaticPool
 
 from ..utils import settings, get_logger
 from ..ekg.models import Base
@@ -34,15 +34,30 @@ class DatabaseManager:
             return
 
         try:
-            # 创建引擎
-            self.engine = create_engine(
-                settings.database_url,
-                poolclass=QueuePool,
-                pool_size=settings.database_pool_size,
-                max_overflow=settings.database_max_overflow,
-                pool_pre_ping=True,  # 连接前ping确保连接可用
-                echo=settings.debug,  # 开发环境打印SQL
-            )
+            # 检测数据库类型
+            is_sqlite = settings.database_url.startswith("sqlite")
+
+            # 根据数据库类型配置引擎
+            if is_sqlite:
+                # SQLite 配置：使用StaticPool，支持多线程
+                self.engine = create_engine(
+                    settings.database_url,
+                    connect_args={"check_same_thread": False},
+                    poolclass=StaticPool,
+                    echo=settings.debug,
+                )
+                logger.info("Using SQLite database (lightweight mode)")
+            else:
+                # PostgreSQL/MySQL 配置：使用连接池
+                self.engine = create_engine(
+                    settings.database_url,
+                    poolclass=QueuePool,
+                    pool_size=settings.database_pool_size,
+                    max_overflow=settings.database_max_overflow,
+                    pool_pre_ping=True,
+                    echo=settings.debug,
+                )
+                logger.info("Using production database with connection pooling")
 
             # 注册事件监听器
             self._register_event_listeners()

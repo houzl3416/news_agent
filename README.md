@@ -70,8 +70,8 @@ EKG是系统的"记忆"，存储结构化的调查结果：
 ### 环境要求
 
 - Python 3.10+
-- PostgreSQL 14+
-- Redis 6+ (可选)
+- 数据库: SQLite（默认，零配置）或 PostgreSQL（可选，用于生产）
+- Redis（可选，用于异步任务队列）
 
 ### 安装步骤
 
@@ -95,16 +95,19 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-4. **配置环境变量**
+4. **配置环境变量（可选）**
 
 ```bash
 cp .env.example .env
-# 编辑 .env 填入实际配置
+# 根据需要编辑 .env
 ```
 
-必填配置：
-- `DATABASE_URL` - PostgreSQL数据库连接
-- `OPENAI_API_KEY` - OpenAI API密钥（或使用Anthropic）
+**默认即可运行**：使用SQLite数据库，无需额外配置。
+
+可选配置：
+- `OPENAI_API_KEY` - OpenAI API密钥（实现完整AI功能时需要）
+- `DATABASE_URL` - 如需切换到PostgreSQL
+- 其他API密钥根据需要配置
 
 5. **初始化数据库**
 

@@ -20,16 +20,16 @@ class Settings(BaseSettings):
     app_env: str = Field(default="development", alias="APP_ENV")
     debug: bool = Field(default=True, alias="DEBUG")
 
-    # 数据库配置
+    # 数据库配置（默认使用SQLite，轻量零配置）
     database_url: str = Field(
-        default="postgresql://user:password@localhost:5432/news_gt",
+        default="sqlite:///./news_gt.db",
         alias="DATABASE_URL"
     )
-    database_pool_size: int = Field(default=10, alias="DATABASE_POOL_SIZE")
-    database_max_overflow: int = Field(default=20, alias="DATABASE_MAX_OVERFLOW")
+    database_pool_size: int = Field(default=5, alias="DATABASE_POOL_SIZE")
+    database_max_overflow: int = Field(default=10, alias="DATABASE_MAX_OVERFLOW")
 
-    # Redis配置
-    redis_url: str = Field(default="redis://localhost:6379/0", alias="REDIS_URL")
+    # Redis配置（可选，用于任务队列）
+    redis_url: Optional[str] = Field(default=None, alias="REDIS_URL")
 
     # AI服务配置
     openai_api_key: Optional[str] = Field(default=None, alias="OPENAI_API_KEY")
