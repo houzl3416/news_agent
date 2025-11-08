@@ -1,0 +1,60 @@
+# NEWS GT - AI 新闻真相认知引擎
+# Python 依赖包
+
+# Web框架
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+pydantic==2.5.3
+pydantic-settings==2.1.0
+
+# 数据库
+sqlalchemy==2.0.25
+alembic==1.13.1
+psycopg2-binary==2.9.9
+
+# 异步支持
+asyncio==3.4.3
+aiohttp==3.9.1
+
+# AI/LLM
+openai==1.10.0
+anthropic==0.8.1
+
+# 数据处理
+pandas==2.1.4
+numpy==1.26.3
+
+# 网络请求
+requests==2.31.0
+httpx==0.26.0
+
+# 文本处理
+beautifulsoup4==4.12.3
+lxml==5.1.0
+
+# 时间处理
+python-dateutil==2.8.2
+
+# 配置管理
+python-dotenv==1.0.0
+
+# 日志
+loguru==0.7.2
+
+# 任务队列（可选）
+celery==5.3.6
+redis==5.0.1
+
+# 测试
+pytest==7.4.4
+pytest-asyncio==0.23.3
+pytest-cov==4.1.0
+
+# 代码质量
+black==24.1.1
+flake8==7.0.0
+mypy==1.8.0
+
+# 开发工具
+ipython==8.20.0
+jupyter==1.0.0
