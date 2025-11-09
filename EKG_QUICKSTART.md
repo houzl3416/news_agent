@@ -312,13 +312,63 @@ echo=True  # 改为 True
 
 如果看到这些，说明 **EKG 模块完全正常**！
 
+## 🎨 可视化图谱（新功能）
+
+### 方式 1: 命令行快速可视化
+
+```bash
+# 安装可视化依赖
+pip install pyvis networkx
+
+# 可视化特定事件
+python demos/ekg_visualization.py --event E-001
+
+# 可视化所有事件
+python demos/ekg_visualization.py --all
+
+# 可视化信源网络
+python demos/ekg_visualization.py --sources
+
+# 可视化证伪关系
+python demos/ekg_visualization.py --refutations
+```
+
+**输出**: 自动生成交互式 HTML 文件并在浏览器中打开！
+
+### 方式 2: Web 交互界面
+
+```bash
+# 启动 Web 服务器
+python demos/ekg_web_demo.py
+```
+
+**效果**:
+- 浏览器自动打开 http://localhost:8000
+- 漂亮的仪表盘显示所有统计数据
+- 点击按钮即可生成各种可视化
+- 查看事件/信源/声明列表
+
+**可视化特点**:
+- 🎨 **颜色编码**: 绿色=已验证，橙色=已证伪，蓝色=待核实
+- 📊 **信源评级**: 节点大小和颜色表示信誉分
+- 🔍 **交互式**: 可拖动、缩放、悬停查看详情
+- ⚡ **证伪链**: 红色虚线箭头显示证伪关系
+
 ## 下一步
 
 1. ✅ **理解飞轮机制** - 查看场景2的输出
 2. ✅ **验证数据持久化** - 查看数据库文件
-3. ✅ **修改测试场景** - 添加自己的测试
-4. ✅ **集成到主项目** - 在 Agent 中使用 EKG
+3. ✅ **可视化图谱** - 运行 `python demos/ekg_web_demo.py`
+4. ✅ **修改测试场景** - 添加自己的测试
+5. ✅ **集成到主项目** - 在 Agent 中使用 EKG
+
+## 📚 更多文档
+
+- [EKG_VISUALIZATION.md](EKG_VISUALIZATION.md) - 详细的可视化使用指南
+- [docs/EKG_DEMO.md](docs/EKG_DEMO.md) - 完整测试文档
+- [docs/EKG_GUIDE.md](docs/EKG_GUIDE.md) - 使用场景和案例
+- [docs/EKG_TECHNICAL.md](docs/EKG_TECHNICAL.md) - 技术实现细节
 
 ---
 
-**遇到问题？** 查看 [docs/EKG_DEMO.md](docs/EKG_DEMO.md) 获取详细帮助。
+**遇到问题？** 查看上述文档获取详细帮助。

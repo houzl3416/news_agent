@@ -37,6 +37,10 @@ python-dotenv==1.0.0
 # 日志
 loguru==0.7.2
 
+# 可视化（用于 EKG 图谱展示）
+pyvis==0.3.2
+networkx==3.2.1
+
 # 任务队列（可选，异步任务需要）
 # celery==5.3.6
 # redis==5.0.1
