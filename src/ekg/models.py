@@ -68,7 +68,7 @@ class Source(Base):
     # 元数据
     url = Column(String(512), nullable=True)
     description = Column(Text, nullable=True)
-    metadata = Column(JSON, default=dict)
+    extra_data = Column(JSON, default=dict)
 
     # 统计数据
     total_claims = Column(Integer, default=0)
@@ -109,7 +109,7 @@ class Event(Base):
     category = Column(String(64), nullable=True)
 
     # 元数据
-    metadata = Column(JSON, default=dict)
+    extra_data = Column(JSON, default=dict)
 
     # 时间戳
     created_at = Column(DateTime, default=datetime.utcnow)
@@ -143,7 +143,7 @@ class Claim(Base):
     # 元数据
     claim_type = Column(String(64), nullable=True)  # financial, temporal, etc.
     entities = Column(JSON, default=list)  # 提及的实体
-    metadata = Column(JSON, default=dict)
+    extra_data = Column(JSON, default=dict)
 
     # 时间戳
     timestamp = Column(DateTime, default=datetime.utcnow)
@@ -170,7 +170,7 @@ class Entity(Base):
 
     # 元数据
     description = Column(Text, nullable=True)
-    metadata = Column(JSON, default=dict)
+    extra_data = Column(JSON, default=dict)
 
     # 时间戳
     created_at = Column(DateTime, default=datetime.utcnow)
@@ -196,7 +196,7 @@ class Artifact(Base):
 
     # 内容
     content = Column(Text, nullable=True)
-    metadata = Column(JSON, default=dict)
+    extra_data = Column(JSON, default=dict)
 
     # 时间戳
     captured_at = Column(DateTime, default=datetime.utcnow)
