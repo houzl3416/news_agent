@@ -1,0 +1,144 @@
+{
+  "sources": [
+    {
+      "name": "路透社",
+      "type": "news_outlet",
+      "url": "https://www.reuters.com",
+      "description": "国际知名新闻通讯社",
+      "extra_data": {
+        "country": "UK",
+        "founded": "1851",
+        "credibility": "high"
+      }
+    },
+    {
+      "name": "@MarketRumors",
+      "type": "social_media",
+      "url": "https://twitter.com/marketrumors",
+      "description": "市场传闻社交媒体账号",
+      "extra_data": {
+        "platform": "Twitter",
+        "followers": 15000,
+        "verified": false
+      }
+    },
+    {
+      "name": "中国证监会",
+      "type": "official_media",
+      "url": "http://www.csrc.gov.cn",
+      "description": "中国证券监督管理委员会官方网站",
+      "extra_data": {
+        "country": "China",
+        "type": "government"
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "E-JSON-001",
+      "title": "某科技公司收购传闻",
+      "description": "市场传闻称某大型科技公司将收购一家AI初创企业",
+      "status": "developing",
+      "extra_data": {
+        "category": "M&A",
+        "industry": "technology",
+        "market_impact": "significant"
+      }
+    }
+  ],
+  "entities": [
+    {
+      "name": "TechGiant Corp",
+      "type": "organization",
+      "description": "全球领先的科技公司",
+      "extra_data": {
+        "industry": "technology",
+        "market_cap": "2000000000000",
+        "headquarters": "USA"
+      }
+    },
+    {
+      "name": "AI Startup Inc",
+      "type": "organization",
+      "description": "人工智能领域的初创公司",
+      "extra_data": {
+        "industry": "AI",
+        "founded": "2020",
+        "employees": 150
+      }
+    }
+  ],
+  "claims": [
+    {
+      "text": "TechGiant Corp 正在谈判以50亿美元收购 AI Startup Inc",
+      "source_name": "@MarketRumors",
+      "event_id": "E-JSON-001",
+      "status": "pending",
+      "claim_type": "financial",
+      "extra_data": {
+        "amount": "5000000000",
+        "currency": "USD"
+      }
+    },
+    {
+      "text": "TechGiant Corp 官方声明：目前没有任何收购计划",
+      "source_name": "路透社",
+      "event_id": "E-JSON-001",
+      "status": "verified",
+      "claim_type": "official_statement",
+      "verification_result": {
+        "method": "official_press_release",
+        "verified_at": "2024-01-20T10:00:00Z",
+        "source_url": "https://www.reuters.com/article/..."
+      },
+      "extra_data": {}
+    },
+    {
+      "text": "中国证监会未收到相关并购申报",
+      "source_name": "中国证监会",
+      "event_id": "E-JSON-001",
+      "status": "verified",
+      "claim_type": "regulatory",
+      "verification_result": {
+        "method": "official_database_check",
+        "verified_at": "2024-01-20T14:00:00Z"
+      },
+      "extra_data": {
+        "regulatory_status": "no_filing"
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "type": "document",
+      "url": "https://example.com/press_release.pdf",
+      "hash": "sha256:abc123...",
+      "extra_data": {
+        "title": "TechGiant Corp Official Statement",
+        "format": "PDF",
+        "size": 524288
+      }
+    },
+    {
+      "type": "image",
+      "url": "https://example.com/rumor_screenshot.png",
+      "hash": "sha256:def456...",
+      "extra_data": {
+        "description": "Social media rumor screenshot",
+        "captured_at": "2024-01-19T18:30:00Z"
+      }
+    }
+  ],
+  "refutations": [
+    {
+      "refuting_claim_id": 2,
+      "refuted_claim_id": 1,
+      "confidence": 0.9,
+      "evidence": {
+        "type": "official_denial",
+        "source": "TechGiant Corp official press release",
+        "verified_by": "Reuters"
+      }
+    }
+  ]
+}

@@ -652,6 +652,47 @@ async def get_claims(limit: int = 50):
     return claims
 
 
+@app.post("/api/import")
+async def import_json_data(data: Dict[str, Any]):
+    """
+    从 JSON 数据导入到 EKG
+
+    接受格式:
+    {
+        "sources": [...],
+        "events": [...],
+        "claims": [...],
+        "entities": [...],
+        "artifacts": [...],
+        "refutations": [...]
+    }
+    """
+    try:
+        import sys
+        sys.path.insert(0, str(Path(__file__).parent))
+        from ekg_import_json import EKGJSONImporter
+
+        importer = EKGJSONImporter(DB_PATH)
+        success = importer.import_data(data)
+        stats = importer.stats.copy()
+        importer.close()
+
+        if success:
+            return {
+                "status": "success",
+                "message": "数据导入成功",
+                "stats": stats
+            }
+        else:
+            return {
+                "status": "error",
+                "message": "数据导入失败",
+                "stats": stats
+            }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"导入失败: {str(e)}")
+
+
 @app.get("/api/visualize")
 async def generate_visualization(type: str, event_id: Optional[str] = None):
     """生成可视化图谱"""
